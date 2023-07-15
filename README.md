@@ -1,2 +1,2 @@
 # NasaGame
-Creación del juego NasaGame, con python, pygame y customtekinter.
+Creación del juego NasaGame, con python, pygame y customTkinter.
