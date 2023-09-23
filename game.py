@@ -66,7 +66,7 @@ class GameWindow(ctk.CTkToplevel):
         self.speed = int(float(set.get_variable('speed')) * 1000) - 350
         self.msg_timer = int(int(float(set.get_variable('msg_timer')) * 1000) / 2)
         self.mode = set.get_variable('mode')
-        self.messages_list = set.get_messages(path.resource_path('show_msg.txt'))
+        self.messages_list = set.get_messages(path.resource_path('customtkinter/show_msg.txt'))
         self.num_msg = len(self.messages_list)
         self.showed_msgs = []
         self.showed_time = 350
@@ -287,7 +287,7 @@ class GameWindow(ctk.CTkToplevel):
     # muestra en pantalla uno de los mensajes disponibles.
     def show_message(self):
         if len(self.messages_list) == 0:
-            self.messages_list = set.get_messages(path.resource_path('show_msg.txt'))
+            self.messages_list = set.get_messages(path.resource_path('customtkinter/show_msg.txt'))
             self.showed_msgs.clear()
         if not self.paused and len(self.messages_list) > 0:
             msg = random.choice(self.messages_list)

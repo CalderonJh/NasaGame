@@ -4,7 +4,7 @@ import customtkinter as ctk
 
 import set  # cargar y guardar configuraciones del juego.
 import path  # contiene la funcion resource_path, la cual devuelve la ruta global de un archivo.
-path_show_msg = path.resource_path('show_msg.txt')
+path_show_msg = path.resource_path('customtkinter/show_msg.txt')
 
 
 # crea la ventana top level.

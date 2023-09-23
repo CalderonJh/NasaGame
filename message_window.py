@@ -5,7 +5,7 @@ import customtkinter as ctk
 import set  # cargar y guardar configuraciones del juego.
 import path  # contiene la funcion resource_path, la cual devuelve la ruta global de un archivo.
 
-path_msgs = path.resource_path('messages.txt')
+path_msgs = path.resource_path('config-ng/messages.txt')
 
 
 # define el tamaño máximo de caracteres de un mensaje.
@@ -47,7 +47,7 @@ def message_top(root: ctk.CTk, pos_x: int, pos_y: int):
                 listbox.delete(msg_index)
                 msg = set.get_messages(path_msgs)[msg_index]
                 set.delete_message(msg_index, path_msgs)
-                if msg in set.get_messages(path.resource_path('show_msg.txt')):
+                if msg in set.get_messages(path.resource_path('customtkinter/show_msg.txt')):
                     set.delete_show(msg)
             except IndexError:
                 print('Error: INDEX ERROR - delete_selected')
@@ -56,7 +56,7 @@ def message_top(root: ctk.CTk, pos_x: int, pos_y: int):
     def delete_all():
         try:
             set.delete_all_messages(path_msgs)
-            set.delete_all_messages(path.resource_path('show_msg.txt'))
+            set.delete_all_messages(path.resource_path('customtkinter/show_msg.txt'))
             listbox.delete(0, tk.END)
         except IndexError:
             print('Error: Delete all messages')
@@ -65,7 +65,7 @@ def message_top(root: ctk.CTk, pos_x: int, pos_y: int):
     def show():
         selected = listbox.curselection()
         for i in selected:
-            set.add_message(set.get_messages(path_msgs)[i], path.resource_path('show_msg.txt'))
+            set.add_message(set.get_messages(path_msgs)[i], path.resource_path('customtkinter/show_msg.txt'))
 
     # widgets
     ctk.CTkButton(f_top, text='Show', width=60, fg_color='#343638', border_color="White", command=show, border_width=1,
@@ -90,7 +90,7 @@ def message_top(root: ctk.CTk, pos_x: int, pos_y: int):
     listbox = tk.Listbox(canvas, selectmode=tk.MULTIPLE, background='#343638', fg='white', font=('Candara', 13),
                          justify='left', highlightbackground='White', selectbackground='#394970', width=49, height=10)
     listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, ipadx=5)
-    for item in set.get_messages(path.resource_path('messages.txt')):
+    for item in set.get_messages(path.resource_path('config-ng/messages.txt')):
         listbox.insert(tk.END, ' ' + item)
 
     # crear mensajes
