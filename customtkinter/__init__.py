@@ -63,17 +63,17 @@ def get_appearance_mode() -> str:
 
 
 def set_default_color_theme(color_string: str):
-    """ set color theme or load custom theme file by passing the path """
+    """ settings color theme or load custom theme file by passing the path """
     ThemeManager.load_theme(color_string)
 
 
 def set_widget_scaling(scaling_value: float):
-    """ set scaling for the widget dimensions """
+    """ settings scaling for the widget dimensions """
     ScalingTracker.set_widget_scaling(scaling_value)
 
 
 def set_window_scaling(scaling_value: float):
-    """ set scaling for window dimensions """
+    """ settings scaling for window dimensions """
     ScalingTracker.set_window_scaling(scaling_value)
 
 

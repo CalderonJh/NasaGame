@@ -56,10 +56,10 @@ class CTkToplevel(tkinter.Toplevel, CTkAppearanceModeBaseClass, CTkScalingBaseCl
 
         self._fg_color = ThemeManager.theme["CTkToplevel"]["fg_color"] if fg_color is None else self._check_color_type(fg_color)
 
-        # set bg color of tkinter.Toplevel
+        # settings bg color of tkinter.Toplevel
         super().configure(bg=self._apply_appearance_mode(self._fg_color))
 
-        # set title of tkinter.Toplevel
+        # settings title of tkinter.Toplevel
         super().title("CTkToplevel")
 
         # indicator variables
@@ -73,11 +73,11 @@ class CTkToplevel(tkinter.Toplevel, CTkAppearanceModeBaseClass, CTkScalingBaseCl
         # save focus before calling withdraw
         self.focused_widget_before_widthdraw = None
 
-        # set CustomTkinter titlebar icon (Windows only)
+        # settings CustomTkinter titlebar icon (Windows only)
         if sys.platform.startswith("win"):
             self.after(200, self._windows_set_titlebar_icon)
 
-        # set titlebar color (Windows only)
+        # settings titlebar color (Windows only)
         if sys.platform.startswith("win"):
             self._windows_set_titlebar_color(self._get_appearance_mode())
 
@@ -115,7 +115,7 @@ class CTkToplevel(tkinter.Toplevel, CTkAppearanceModeBaseClass, CTkScalingBaseCl
 
         super().geometry(f"{self._apply_window_scaling(self._current_width)}x{self._apply_window_scaling(self._current_height)}")
 
-        # set new scaled min and max with delay (delay prevents weird bug where window dimensions snap to unscaled dimensions when mouse releases window)
+        # settings new scaled min and max with delay (delay prevents weird bug where window dimensions snap to unscaled dimensions when mouse releases window)
         self.after(1000, self._set_scaled_min_max)  # Why 1000ms delay? Experience! (Everything tested on Windows 11)
 
     def block_update_dimensions_event(self):
@@ -205,7 +205,7 @@ class CTkToplevel(tkinter.Toplevel, CTkAppearanceModeBaseClass, CTkScalingBaseCl
 
     def _windows_set_titlebar_icon(self):
         try:
-            # if not the user already called iconbitmap method, set icon
+            # if not the user already called iconbitmap method, settings icon
             if not self._iconbitmap_method_called:
                 customtkinter_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
                 self.iconbitmap(os.path.join(customtkinter_directory, "assets", "icons", "CustomTkinter_icon_Windows.ico"))

@@ -4,9 +4,8 @@ from PIL import Image
 import pygame
 import random
 
-import set  # cargar y guardar configuraciones del juego.
-import path  # contiene la funcion resource_path, la cual devuelve la ruta global de un archivo.
-import screen_info  # contiene la funcion get_info usada para obtener el tamaño de pantalla actual.
+# contiene la funcion get_info usada para obtener el tamaño de pantalla actual.
+from src.tools import modify, screen_info, path
 
 sc_ancho, sc_alto = screen_info.get_info()
 
@@ -24,7 +23,9 @@ def milisegundos_a_minutos(milisegundos):
 
 # GameWindow es una ventana top level de Welcome donde actua el juego.
 class GameWindow(ctk.CTkToplevel):
-    size_flechas = (int(sc_ancho * (1 / 5)), int(sc_alto * (1 / 5)))
+    size_flechas = (int(sc_ancho * (1 / 5)),
+                    int(sc_alto * (1 / 5)))
+
     size_image = int(sc_ancho * (1 / 3))
 
     right: ctk.CTkFrame
@@ -49,24 +50,38 @@ class GameWindow(ctk.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.paused = False
-        self.time_to_play = int(float(set.get_variable('time')) * 60000)
+        self.time_to_play = int(float(modify.get_variable('time')) * 60000)
 
-        self.letters_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        self.letters_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', "L",
+                               "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
         self.numbers_option = [str(i) for i in range(1, 100)]
-        self.group_of_three = ['A', 'B', 'C', 'X', 'Y', 'Z', 'D', 'E', 'F', 'U', 'V', "W", "G", "H", "I", "R", "S", "T", "J", "K", "L", "O", "P", "Q", "M", "N"]
-        self.group_of_four = ['A', 'B', 'C', 'D', 'W', 'X', 'Y', 'Z', 'E', 'F', 'G', "H", "S", "T", "U", "V", "I", "J", "K", "L", "O", "P", "Q", "R", "M", "N"]
+
+        self.group_of_three = ['A', 'B', 'C', 'X', 'Y', 'Z', 'D', 'E', 'F', 'U', 'V', "W", "G", "H", "I",
+                               "R", "S", "T", "J", "K", "L", "O", "P", "Q", "M", "N"]
+
+        self.group_of_four = ['A', 'B', 'C', 'D', 'W', 'X', 'Y', 'Z', 'E', 'F', 'G', "H", "S", "T", "U", "V",
+                              "I", "J", "K", "L", "O", "P", "Q", "R", "M", "N"]
         self.index_image = 0
 
         self.showed_images = []
 
-        self.finish_image = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\finish_image.png')), dark_image=Image.open(path.resource_path('Pictures\\finish_image.png')), size=(self.size_image, self.size_image))
+        self.finish_image = ctk.CTkImage(light_image=Image.open(
+            path.resource_path(
+                'Pictures\\finish_image.png')),
+            dark_image=Image.open(
+                path.resource_path('Pictures\\finish_image.png')),
+            size=(self.size_image,
+                  self.size_image))
+
         self.current_direction = random.choice(["r", "l", "b"])
-        self.mode = set.get_variable('mode')
+        self.mode = modify.get_variable('mode')
         self.current_image = self.first_image()
-        self.speed = int(float(set.get_variable('speed')) * 1000) - 350
-        self.msg_timer = int(int(float(set.get_variable('msg_timer')) * 1000) / 2)
-        self.mode = set.get_variable('mode')
-        self.messages_list = set.get_messages(path.resource_path('customtkinter/show_msg.txt'))
+        self.speed = int(float(modify.get_variable('speed')) * 1000) - 350
+        self.msg_timer = int(int(float(modify.get_variable('msg_timer')) * 1000) / 2)
+        self.mode = modify.get_variable('mode')
+        self.messages_list = modify.get_messages(
+            path.resource_path('config-ng\\show_msg.txt'))
         self.num_msg = len(self.messages_list)
         self.showed_msgs = []
         self.showed_time = 350
@@ -101,54 +116,165 @@ class GameWindow(ctk.CTkToplevel):
 
         ctk.CTkFrame(center, fg_color='transparent', width=20).grid(row=0, column=0)
 
-        self.flecha_left = ctk.CTkFrame(center, fg_color='transparent', width=self.size_flechas[0], height=self.size_flechas[1])
-        self.flecha_left.grid(row=0, column=1, padx=10, sticky='w')
+        self.flecha_left = ctk.CTkFrame(center,
+                                        fg_color='transparent',
+                                        width=self.size_flechas[0],
+                                        height=self.size_flechas[1])
+        self.flecha_left.grid(row=0,
+                              column=1,
+                              padx=10,
+                              sticky='w')
+
         self.grid_columnconfigure(0, weight=1)
-        self.frame_letra = ctk.CTkFrame(center, fg_color='transparent', width=self.size_image, height=self.size_image)
-        self.frame_letra.grid(row=0, column=2, columnspan=2, sticky='nsew')
+
+        self.frame_letra = ctk.CTkFrame(center,
+                                        fg_color='transparent',
+                                        width=self.size_image,
+                                        height=self.size_image)
+
+        self.frame_letra.grid(row=0,
+                              column=2,
+                              columnspan=2,
+                              sticky='nsew')
+
         self.grid_columnconfigure(1, weight=1)
 
-        self.flecha_right = ctk.CTkFrame(center, fg_color='transparent', width=self.size_flechas[0], height=self.size_flechas[1])
-        self.flecha_right.grid(row=0, column=4, sticky='e', padx=10)
-        self.grid_columnconfigure(3, weight=1)
-        self.msg = ctk.CTkFrame(self, fg_color='transparent')
-        self.msg.pack(fill='both', side='top', anchor='center')
+        self.flecha_right = ctk.CTkFrame(center,
+                                         fg_color='transparent',
+                                         width=self.size_flechas[0],
+                                         height=self.size_flechas[1])
 
-        self.time_frame = ctk.CTkFrame(self, fg_color='transparent', width=int(sc_ancho / 6) - 100)
-        self.time_frame.pack(fill='y', side='left', anchor='w')
-        self.right = ctk.CTkFrame(self, fg_color='transparent', width=int(sc_ancho / 6) - 100)
-        self.right.pack(fill='y', side='right', anchor='se')
+        self.flecha_right.grid(row=0,
+                               column=4,
+                               sticky='e',
+                               padx=10)
+
+        self.grid_columnconfigure(3, weight=1)
+
+        self.msg = ctk.CTkFrame(self, fg_color='transparent')
+
+        self.msg.pack(fill='both',
+                      side='top',
+                      anchor='center')
+
+        self.time_frame = ctk.CTkFrame(self,
+                                       fg_color='transparent',
+                                       width=int(sc_ancho / 6) - 100)
+
+        self.time_frame.pack(fill='y',
+                             side='left',
+                             anchor='w')
+
+        self.right = ctk.CTkFrame(self,
+                                  fg_color='transparent',
+                                  width=int(sc_ancho / 6) - 100)
+
+        self.right.pack(fill='y',
+                        side='right',
+                        anchor='se')
 
     # crea los widgets como labels y botones.
     def widgets(self):
         image_path = 'Pictures\\' + self.current_image + ".png"
         izqu_path = 'Pictures\\left.png'
         der_path = 'Pictures\\right.png'
-        letra = ctk.CTkImage(light_image=Image.open(path.resource_path(image_path)),
-                             dark_image=Image.open(path.resource_path(image_path)), size=(self.size_image, self.size_image))
-        derecha = ctk.CTkImage(light_image=Image.open(path.resource_path(der_path)),
-                               dark_image=Image.open(path.resource_path(der_path)), size=self.size_flechas)
-        izquierda = ctk.CTkImage(light_image=Image.open(path.resource_path(izqu_path)),
-                                 dark_image=Image.open(path.resource_path(izqu_path)), size=self.size_flechas)
 
-        self.label_izquierda = ctk.CTkLabel(self.flecha_left, image=izquierda, text='')
-        self.label_derecha = ctk.CTkLabel(self.flecha_right, image=derecha, text='')
-        self.label_imagen = ctk.CTkLabel(self.frame_letra, image=letra, text='')
-        self.label_msg = ctk.CTkLabel(self.msg, text="", font=('Arial Nova Cond Light', 60), text_color='darkorange', height=40, fg_color='transparent')
+        letra = ctk.CTkImage(light_image=Image.open(path.resource_path(image_path)),
+                             dark_image=Image.open(path.resource_path(image_path)),
+                             size=(self.size_image, self.size_image))
+
+        derecha = ctk.CTkImage(light_image=Image.open(path.resource_path(der_path)),
+                               dark_image=Image.open(path.resource_path(der_path)),
+                               size=self.size_flechas)
+
+        izquierda = ctk.CTkImage(light_image=Image.open(path.resource_path(izqu_path)),
+                                 dark_image=Image.open(path.resource_path(izqu_path)),
+                                 size=self.size_flechas)
+
+        self.label_izquierda = ctk.CTkLabel(self.flecha_left,
+                                            image=izquierda,
+                                            text='')
+
+        self.label_derecha = ctk.CTkLabel(self.flecha_right,
+                                          image=derecha,
+                                          text='')
+
+        self.label_imagen = ctk.CTkLabel(self.frame_letra,
+                                         image=letra,
+                                         text='')
+
+        self.label_msg = ctk.CTkLabel(self.msg,
+                                      text="",
+                                      font=('Arial Nova Cond Light', 60),
+                                      text_color='darkorange',
+                                      height=40,
+                                      fg_color='transparent')
+
         self.label_imagen.pack(pady=20, padx=20)
         self.after(self.showed_time, self.hide)
         self.change_direction()
-        ctk.CTkFrame(self.right, fg_color='transparent', height=int(self.right.cget('height') * 0.25)).grid(row=0, column=0, rowspan=2, columnspan=2)
+        ctk.CTkFrame(self.right,
+                     fg_color='transparent',
+                     height=int(self.right.cget('height') * 0.25)).grid(row=0,
+                                                                        column=0,
+                                                                        rowspan=2,
+                                                                        columnspan=2)
+
         self.label_msg.pack(anchor='center', fill='both')
-        image_exit = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\exit_game.png')), dark_image=Image.open(path.resource_path('Pictures\\exit_game.png')), size=(40, 40))
-        self.image_pause = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\pause.png')), dark_image=Image.open(path.resource_path('Pictures\\pause.png')), size=(40, 40))
-        self.image_resume = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\resume.png')), dark_image=Image.open(path.resource_path('Pictures\\resume.png')), size=(40, 40))
-        self.pause_button = ctk.CTkButton(self.right, text="", border_width=2, border_spacing=1,  border_color='black', fg_color='white', hover_color='darkgray', image=self.image_pause, height=40, width=40, command=self.pause_game)
-        self.label_time = ctk.CTkLabel(self.time_frame, text=milisegundos_a_minutos(self.time_to_play), font=('Courier', 75), text_color='black', fg_color='transparent')
-        self.label_time.pack(anchor='center', padx=20, fill='both')
-        self.pause_button.grid(column=0, row=2, sticky='e', padx=5)
-        self.exit_button = ctk.CTkButton(self.right, text="", border_width=2, border_spacing=1, border_color='black', fg_color='white', hover_color='darkgray', image=image_exit, height=40, width=40, command=self.exit)
-        self.exit_button.grid(column=1, row=2, sticky='w', padx=10)
+
+        image_exit = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\exit_game.png')),
+                                  dark_image=Image.open(path.resource_path('Pictures\\exit_game.png')),
+                                  size=(40, 40))
+
+        self.image_pause = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\pause.png')),
+                                        dark_image=Image.open(path.resource_path('Pictures\\pause.png')),
+                                        size=(40, 40))
+
+        self.image_resume = ctk.CTkImage(light_image=Image.open(path.resource_path('Pictures\\resume.png')),
+                                         dark_image=Image.open(path.resource_path('Pictures\\resume.png')),
+                                         size=(40, 40))
+
+        self.pause_button = ctk.CTkButton(self.right,
+                                          text="",
+                                          border_width=2,
+                                          border_spacing=1,
+                                          border_color='black',
+                                          fg_color='white',
+                                          hover_color='darkgray',
+                                          image=self.image_pause,
+                                          height=40, width=40,
+                                          command=self.pause_game)
+
+        self.label_time = ctk.CTkLabel(self.time_frame,
+                                       text=milisegundos_a_minutos(self.time_to_play),
+                                       font=('Courier', 75),
+                                       text_color='black',
+                                       fg_color='transparent')
+
+        self.label_time.pack(anchor='center',
+                             padx=20,
+                             fill='both')
+
+        self.pause_button.grid(column=0,
+                               row=2,
+                               sticky='e',
+                               padx=5)
+
+        self.exit_button = ctk.CTkButton(self.right,
+                                         text="",
+                                         border_width=2,
+                                         border_spacing=1,
+                                         border_color='black',
+                                         fg_color='white',
+                                         hover_color='darkgray',
+                                         image=image_exit,
+                                         height=40, width=40,
+                                         command=self.exit)
+
+        self.exit_button.grid(column=1,
+                              row=2,
+                              sticky='w',
+                              padx=10)
 
     # define el nombre de la primera imagen a mostrar, dado el modo de juego
     def first_image(self):
@@ -187,7 +313,8 @@ class GameWindow(ctk.CTkToplevel):
 
         if self.mode == 'ABC-Random':
             if len(self.letters_option) == 0:
-                self.letters_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+                self.letters_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', "L",
+                                       "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
                 self.showed_images.clear()
             new_image_name = random.choice(self.letters_option)
             self.showed_images.append(new_image_name)
@@ -223,7 +350,8 @@ class GameWindow(ctk.CTkToplevel):
 
         elif self.mode == 'Mixed-Random':
             if len(self.letters_option) == 0:
-                self.letters_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+                self.letters_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "K", "L", "M", "N",
+                                       "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
                 self.showed_images.clear()
             if len(self.numbers_option) == 0:
                 self.numbers_option = [str(i) for i in range(1, 100)]
@@ -287,7 +415,7 @@ class GameWindow(ctk.CTkToplevel):
     # muestra en pantalla uno de los mensajes disponibles.
     def show_message(self):
         if len(self.messages_list) == 0:
-            self.messages_list = set.get_messages(path.resource_path('customtkinter/show_msg.txt'))
+            self.messages_list = modify.get_messages(path.resource_path('config-ng\\show_msg.txt'))
             self.showed_msgs.clear()
         if not self.paused and len(self.messages_list) > 0:
             msg = random.choice(self.messages_list)
@@ -354,7 +482,7 @@ class GameWindow(ctk.CTkToplevel):
         self.destroy()
         pygame.mixer.music.load(path.resource_path('music\\welcome_music.mp3'))
         pygame.mixer.music.play(loops=-1, start=8.5, fade_ms=5000)
-        if set.get_variable('mute') == 'Mute':
+        if modify.get_variable('mute') == 'Mute':
             pygame.mixer.music.set_volume(0.2)
         else:
             pygame.mixer.music.set_volume(0.0)

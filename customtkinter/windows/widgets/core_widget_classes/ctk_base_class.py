@@ -48,10 +48,10 @@ class CTkBaseClass(tkinter.Frame, CTkAppearanceModeBaseClass, CTkScalingBaseClas
         # dimensions independent of scaling
         self._current_width = width  # _current_width and _current_height in pixel, represent current size of the widget
         self._current_height = height  # _current_width and _current_height are independent of the scale
-        self._desired_width = width  # _desired_width and _desired_height, represent desired size set by width and height
+        self._desired_width = width  # _desired_width and _desired_height, represent desired size settings by width and height
         self._desired_height = height
 
-        # set width and height of tkinter.Frame
+        # settings width and height of tkinter.Frame
         super().configure(width=self._apply_widget_scaling(self._desired_width),
                           height=self._apply_widget_scaling(self._desired_height))
 
@@ -64,7 +64,7 @@ class CTkBaseClass(tkinter.Frame, CTkAppearanceModeBaseClass, CTkScalingBaseClas
         # background color
         self._bg_color: Union[str, Tuple[str, str]] = self._detect_color_of_master() if bg_color == "transparent" else self._check_color_type(bg_color, transparency=True)
 
-        # set bg color of tkinter.Frame
+        # settings bg color of tkinter.Frame
         super().configure(bg=self._apply_appearance_mode(self._bg_color))
 
         # add configure callback to tkinter.Frame

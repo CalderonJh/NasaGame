@@ -40,7 +40,7 @@ class CTkSlider(CTkBaseClass):
                  orientation: str = "horizontal",
                  **kwargs):
 
-        # set default dimensions according to orientation
+        # settings default dimensions according to orientation
         if width is None:
             if orientation.lower() == "vertical":
                 width = 16
@@ -107,7 +107,7 @@ class CTkSlider(CTkBaseClass):
             self._variable_callback_blocked = False
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None or sequence == "<Enter>":
             self._canvas.bind("<Enter>", self._on_enter)
         if sequence is None or sequence == "<Leave>":

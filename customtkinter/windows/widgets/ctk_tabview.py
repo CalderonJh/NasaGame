@@ -292,7 +292,7 @@ class CTkTabview(CTkBaseClass):
         """ creates new tab with given name at position index """
 
         if name not in self._tab_dict:
-            # if no tab exists, set grid for segmented button
+            # if no tab exists, settings grid for segmented button
             if len(self._tab_dict) == 0:
                 self._set_grid_segmented_button()
 
@@ -334,7 +334,7 @@ class CTkTabview(CTkBaseClass):
             self._tab_dict.pop(name)
             self._segmented_button.delete(name)
 
-            # set current_name to '' and remove segmented button if no tab is left
+            # settings current_name to '' and remove segmented button if no tab is left
             if len(self._name_list) == 0:
                 self._current_name = ""
                 self._segmented_button.grid_forget()

@@ -120,7 +120,7 @@ class CTkRadioButton(CTkBaseClass):
         self._draw()
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None or sequence == "<Enter>":
             self._canvas.bind("<Enter>", self._on_enter)
             self._text_label.bind("<Enter>", self._on_enter)

@@ -13,7 +13,7 @@ from ..font import CTkFont
 class CTkScalingBaseClass:
     """
     Super-class that manages the scaling values and callbacks.
-    Works for widgets and windows, type must be set in init method with
+    Works for widgets and windows, type must be settings in init method with
     scaling_type attribute. Methods:
 
     - _set_scaling() abstractmethod, gets called when scaling changes, must be overridden

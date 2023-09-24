@@ -10,7 +10,7 @@ from .core_widget_classes import CTkBaseClass
 class CTkScrollbar(CTkBaseClass):
     """
     Scrollbar with rounded corners, configurable spacing.
-    Connect to scrollable widget by passing .set() method and set command attribute.
+    Connect to scrollable widget by passing .settings() method and settings command attribute.
     For detailed information check out the documentation.
     """
 
@@ -32,7 +32,7 @@ class CTkScrollbar(CTkBaseClass):
                  orientation: str = "vertical",
                  **kwargs):
 
-        # set default dimensions according to orientation
+        # settings default dimensions according to orientation
         if width is None:
             if orientation.lower() == "vertical":
                 width = 16
@@ -75,7 +75,7 @@ class CTkScrollbar(CTkBaseClass):
         self._draw()
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None:
             self._canvas.tag_bind("border_parts", "<Button-1>", self._clicked)
         if sequence is None or sequence == "<Enter>":

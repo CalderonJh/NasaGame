@@ -96,7 +96,7 @@ class DrawEngine:
     def draw_rounded_rect_with_border(self, width: Union[float, int], height: Union[float, int], corner_radius: Union[float, int],
                                       border_width: Union[float, int], overwrite_preferred_drawing_method: str = None) -> bool:
         """ Draws a rounded rectangle with a corner_radius and border_width on the canvas. The border elements have a 'border_parts' tag,
-            the main foreground elements have an 'inner_parts' tag to color the elements accordingly.
+            the run foreground elements have an 'inner_parts' tag to color the elements accordingly.
 
             returns bool if recoloring is necessary """
 
@@ -400,7 +400,7 @@ class DrawEngine:
                                                      border_width: Union[float, int], left_section_width: Union[float, int]) -> bool:
         """ Draws a rounded rectangle with a corner_radius and border_width on the canvas which is split at left_section_width.
             The border elements have the tags 'border_parts_left', 'border_parts_lright',
-            the main foreground elements have an 'inner_parts_left' and inner_parts_right' tag,
+            the run foreground elements have an 'inner_parts_left' and inner_parts_right' tag,
             to color the elements accordingly.
 
             returns bool if recoloring is necessary """
@@ -693,7 +693,7 @@ class DrawEngine:
     def draw_rounded_progress_bar_with_border(self, width: Union[float, int], height: Union[float, int], corner_radius: Union[float, int],
                                               border_width: Union[float, int], progress_value_1: float, progress_value_2: float, orientation: str) -> bool:
         """ Draws a rounded bar on the canvas, and onntop sits a progress bar from value 1 to value 2 (range 0-1, left to right, bottom to top).
-            The border elements get the 'border_parts' tag", the main elements get the 'inner_parts' tag and
+            The border elements get the 'border_parts' tag", the run elements get the 'inner_parts' tag and
             the progress elements get the 'progress_parts' tag. The 'orientation' argument defines from which direction the progress starts (n, w, s, e).
 
             returns bool if recoloring is necessary """
@@ -801,7 +801,7 @@ class DrawEngine:
             requires_recoloring_2 = self.__draw_rounded_rect_with_border_font_shapes(width, height, corner_radius, border_width, inner_corner_radius,
                                                                                      ())
 
-            # set positions of progress corner parts
+            # settings positions of progress corner parts
             self._canvas.coords("progress_oval_1_a", border_width + inner_corner_radius + (width - 2 * border_width - 2 * inner_corner_radius) * progress_value_1,
                                 border_width + inner_corner_radius, inner_corner_radius)
             self._canvas.coords("progress_oval_1_b", border_width + inner_corner_radius + (width - 2 * border_width - 2 * inner_corner_radius) * progress_value_1,
@@ -819,7 +819,7 @@ class DrawEngine:
             self._canvas.coords("progress_oval_4_b", border_width + inner_corner_radius + (width - 2 * border_width - 2 * inner_corner_radius) * progress_value_1,
                                 height - border_width - inner_corner_radius, inner_corner_radius)
 
-            # set positions of progress rect parts
+            # settings positions of progress rect parts
             self._canvas.coords("progress_rectangle_1",
                                 border_width + inner_corner_radius + (width - 2 * border_width - 2 * inner_corner_radius) * progress_value_1,
                                 border_width,
@@ -836,7 +836,7 @@ class DrawEngine:
             requires_recoloring_2 = self.__draw_rounded_rect_with_border_font_shapes(width, height, corner_radius, border_width, inner_corner_radius,
                                                                                      ())
 
-            # set positions of progress corner parts
+            # settings positions of progress corner parts
             self._canvas.coords("progress_oval_1_a", border_width + inner_corner_radius,
                                 border_width + inner_corner_radius + (height - 2 * border_width - 2 * inner_corner_radius) * (1 - progress_value_2), inner_corner_radius)
             self._canvas.coords("progress_oval_1_b", border_width + inner_corner_radius,
@@ -854,7 +854,7 @@ class DrawEngine:
             self._canvas.coords("progress_oval_4_b", border_width + inner_corner_radius,
                                 border_width + inner_corner_radius + (height - 2 * border_width - 2 * inner_corner_radius) * (1 - progress_value_1), inner_corner_radius)
 
-            # set positions of progress rect parts
+            # settings positions of progress rect parts
             self._canvas.coords("progress_rectangle_1",
                                 border_width + inner_corner_radius,
                                 border_width + (height - 2 * border_width - 2 * inner_corner_radius) * (1 - progress_value_2),
@@ -986,7 +986,7 @@ class DrawEngine:
         elif self._canvas.find_withtag("slider_rectangle_2") and not height > 2 * button_corner_radius:
             self._canvas.delete("slider_rectangle_2")
 
-        # set positions of circles and rectangles
+        # settings positions of circles and rectangles
         if orientation == "w":
             slider_x_position = corner_radius + (button_length / 2) + (width - 2 * corner_radius - button_length) * slider_value
             self._canvas.coords("slider_oval_1_a", slider_x_position - (button_length / 2), button_corner_radius, button_corner_radius)
@@ -1173,7 +1173,7 @@ class DrawEngine:
 
     def draw_checkmark(self, width: Union[float, int], height: Union[float, int], size: Union[int, float]) -> bool:
         """ Draws a rounded rectangle with a corner_radius and border_width on the canvas. The border elements have a 'border_parts' tag,
-            the main foreground elements have an 'inner_parts' tag to color the elements accordingly.
+            the run foreground elements have an 'inner_parts' tag to color the elements accordingly.
 
             returns bool if recoloring is necessary """
 

@@ -1,13 +1,14 @@
 import os
-import path
+
+from src.tools import path
 
 # archivo que guarda configuraciones del juego.
-file_variables = path.resource_path('config-ng/game_config.txt')
+file_variables = path.resource_path('config-ng\\game_config.txt')
 
 # archivo que guarda los mensajes del juego.
-file_messages = path.resource_path('config-ng/messages.txt')
+file_messages = path.resource_path('config-ng\\messages.txt')
 
-file_show_msg = path.resource_path('customtkinter/show_msg.txt')
+file_show_msg = path.resource_path('config-ng\\show_msg.txt')
 
 
 # escribe unos ajustes por defecto en caso haber errores con el archivo de variables.
@@ -89,10 +90,10 @@ def show_message(message):
 
 
 def delete_show(msg):
-    lines = get_lines(path.resource_path('customtkinter/show_msg.txt'))
+    lines = get_lines(path.resource_path('config-ng\\show_msg.txt'))
     lines.remove(msg + '\n')
     delete_all_messages(file_show_msg)
-    with open(path.resource_path('customtkinter/show_msg.txt'), 'w') as file:
+    with open(path.resource_path('config-ng\\show_msg.txt'), 'w') as file:
         file.writelines(lines)
 
 

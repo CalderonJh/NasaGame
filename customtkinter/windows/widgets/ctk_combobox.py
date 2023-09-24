@@ -117,7 +117,7 @@ class CTkComboBox(CTkBaseClass):
                 self._entry.insert(0, "CTkComboBox")
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None:
             self._canvas.tag_bind("right_parts", "<Enter>", self._on_enter)
             self._canvas.tag_bind("dropdown_arrow", "<Enter>", self._on_enter)
@@ -348,7 +348,7 @@ class CTkComboBox(CTkBaseClass):
             elif sys.platform.startswith("win") and len(self._values) > 0 and self._cursor_manipulation_enabled:
                 self._canvas.configure(cursor="hand2")
 
-            # set color of inner button parts to hover color
+            # settings color of inner button parts to hover color
             self._canvas.itemconfig("inner_parts_right",
                                     outline=self._apply_appearance_mode(self._button_hover_color),
                                     fill=self._apply_appearance_mode(self._button_hover_color))
@@ -362,7 +362,7 @@ class CTkComboBox(CTkBaseClass):
         elif sys.platform.startswith("win") and len(self._values) > 0 and self._cursor_manipulation_enabled:
             self._canvas.configure(cursor="arrow")
 
-        # set color of inner button parts
+        # settings color of inner button parts
         self._canvas.itemconfig("inner_parts_right",
                                 outline=self._apply_appearance_mode(self._button_color),
                                 fill=self._apply_appearance_mode(self._button_color))

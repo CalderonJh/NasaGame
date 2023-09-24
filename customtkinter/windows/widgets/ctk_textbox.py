@@ -14,7 +14,7 @@ class CTkTextbox(CTkBaseClass):
     """
     Textbox with x and y scrollbars, rounded corners, and all text features of tkinter.Text widget.
     Scrollbars only appear when they are needed. Text is wrapped on line end by default,
-    set wrap='none' to disable automatic line wrapping.
+    settings wrap='none' to disable automatic line wrapping.
     For detailed information check out the documentation.
 
     Detailed methods and parameters of the underlaying tkinter.Text widget can be found here:

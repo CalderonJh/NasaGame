@@ -106,7 +106,7 @@ class CTkButton(CTkBaseClass):
         self._draw()
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
 
         if sequence is None or sequence == "<Enter>":
             self._canvas.bind("<Enter>", self._on_enter)
@@ -202,12 +202,12 @@ class CTkButton(CTkBaseClass):
 
             self._canvas.configure(bg=self._apply_appearance_mode(self._bg_color))
 
-            # set color for the button border parts (outline)
+            # settings color for the button border parts (outline)
             self._canvas.itemconfig("border_parts",
                                     outline=self._apply_appearance_mode(self._border_color),
                                     fill=self._apply_appearance_mode(self._border_color))
 
-            # set color for inner button parts
+            # settings color for inner button parts
             if self._fg_color == "transparent":
                 self._canvas.itemconfig("inner_parts",
                                         outline=self._apply_appearance_mode(self._bg_color),
@@ -236,7 +236,7 @@ class CTkButton(CTkBaseClass):
                 self._text_label.bind("<Button-1>", self._clicked)
 
             if no_color_updates is False:
-                # set text_label fg color (text color)
+                # settings text_label fg color (text color)
                 self._text_label.configure(fg=self._apply_appearance_mode(self._text_color))
 
                 if self._state == tkinter.DISABLED:
@@ -261,7 +261,7 @@ class CTkButton(CTkBaseClass):
 
             if self._image_label is None:
                 self._image_label = tkinter.Label(master=self)
-                self._update_image()  # set image
+                self._update_image()  # settings image
                 self._create_grid()
 
                 self._image_label.bind("<Enter>", self._on_enter)
@@ -270,7 +270,7 @@ class CTkButton(CTkBaseClass):
                 self._image_label.bind("<Button-1>", self._clicked)
 
             if no_color_updates is False:
-                # set image_label bg color (background color of label)
+                # settings image_label bg color (background color of label)
                 if self._apply_appearance_mode(self._fg_color) == "transparent":
                     self._image_label.configure(bg=self._apply_appearance_mode(self._bg_color))
                 else:
@@ -503,16 +503,16 @@ class CTkButton(CTkBaseClass):
             else:
                 inner_parts_color = self._hover_color
 
-            # set color of inner button parts to hover color
+            # settings color of inner button parts to hover color
             self._canvas.itemconfig("inner_parts",
                                     outline=self._apply_appearance_mode(inner_parts_color),
                                     fill=self._apply_appearance_mode(inner_parts_color))
 
-            # set text_label bg color to button hover color
+            # settings text_label bg color to button hover color
             if self._text_label is not None:
                 self._text_label.configure(bg=self._apply_appearance_mode(inner_parts_color))
 
-            # set image_label bg color to button hover color
+            # settings image_label bg color to button hover color
             if self._image_label is not None:
                 self._image_label.configure(bg=self._apply_appearance_mode(inner_parts_color))
 
@@ -524,16 +524,16 @@ class CTkButton(CTkBaseClass):
         else:
             inner_parts_color = self._fg_color
 
-        # set color of inner button parts
+        # settings color of inner button parts
         self._canvas.itemconfig("inner_parts",
                                 outline=self._apply_appearance_mode(inner_parts_color),
                                 fill=self._apply_appearance_mode(inner_parts_color))
 
-        # set text_label bg color (label color)
+        # settings text_label bg color (label color)
         if self._text_label is not None:
             self._text_label.configure(bg=self._apply_appearance_mode(inner_parts_color))
 
-        # set image_label bg color (image bg color)
+        # settings image_label bg color (image bg color)
         if self._image_label is not None:
             self._image_label.configure(bg=self._apply_appearance_mode(inner_parts_color))
 

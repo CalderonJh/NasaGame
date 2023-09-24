@@ -41,7 +41,7 @@ class CTkScrollableFrame(tkinter.Frame, CTkAppearanceModeBaseClass, CTkScalingBa
         self._orientation = orientation
 
         # dimensions independent of scaling
-        self._desired_width = width  # _desired_width and _desired_height, represent desired size set by width and height
+        self._desired_width = width  # _desired_width and _desired_height, represent desired size settings by width and height
         self._desired_height = height
 
         self._parent_frame = CTkFrame(master=master, width=0, height=0, corner_radius=corner_radius,

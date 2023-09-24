@@ -38,7 +38,7 @@ class CTkProgressBar(CTkBaseClass):
                  indeterminate_speed: float = 1,
                  **kwargs):
 
-        # set default dimensions according to orientation
+        # settings default dimensions according to orientation
         if width is None:
             if orientation.lower() == "vertical":
                 width = 8
@@ -234,7 +234,7 @@ class CTkProgressBar(CTkBaseClass):
             self.set(self._variable.get(), from_variable_callback=True)
 
     def set(self, value, from_variable_callback=False):
-        """ set determinate value """
+        """ settings determinate value """
         self._determinate_value = value
 
         if self._determinate_value > 1:

@@ -114,7 +114,7 @@ class CTkCheckBox(CTkBaseClass):
         self._text_label.grid(row=0, column=2, sticky="w")
         self._text_label["anchor"] = "w"
 
-        # register variable callback and set state according to variable
+        # register variable callback and settings state according to variable
         if self._variable is not None and self._variable != "":
             self._variable_callback_name = self._variable.trace_add("write", self._variable_callback)
             self._check_state = True if self._variable.get() == self._onvalue else False
@@ -124,7 +124,7 @@ class CTkCheckBox(CTkBaseClass):
         self._draw()
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None or sequence == "<Enter>":
             self._canvas.bind("<Enter>", self._on_enter)
             self._text_label.bind("<Enter>", self._on_enter)

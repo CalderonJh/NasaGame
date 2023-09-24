@@ -128,7 +128,7 @@ class CTkOptionMenu(CTkBaseClass):
             self._text_label.configure(text=self._current_value)
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None or sequence == "<Enter>":
             self._canvas.bind("<Enter>", self._on_enter)
             self._text_label.bind("<Enter>", self._on_enter)
@@ -352,13 +352,13 @@ class CTkOptionMenu(CTkBaseClass):
 
     def _on_enter(self, event=0):
         if self._hover is True and self._state == tkinter.NORMAL and len(self._values) > 0:
-            # set color of inner button parts to hover color
+            # settings color of inner button parts to hover color
             self._canvas.itemconfig("inner_parts_right",
                                     outline=self._apply_appearance_mode(self._button_hover_color),
                                     fill=self._apply_appearance_mode(self._button_hover_color))
 
     def _on_leave(self, event=0):
-        # set color of inner button parts
+        # settings color of inner button parts
         self._canvas.itemconfig("inner_parts_right",
                                 outline=self._apply_appearance_mode(self._button_color),
                                 fill=self._apply_appearance_mode(self._button_color))

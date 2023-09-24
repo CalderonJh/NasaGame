@@ -62,7 +62,7 @@ class CTkEntry(CTkBaseClass):
         self._is_focused: bool = True
         self._placeholder_text = placeholder_text
         self._placeholder_text_active = False
-        self._pre_placeholder_arguments = {}  # some set arguments of the entry will be changed for placeholder and then set back
+        self._pre_placeholder_arguments = {}  # some settings arguments of the entry will be changed for placeholder and then settings back
         self._textvariable = textvariable
         self._state = state
         self._textvariable_callback_name: str = ""
@@ -98,7 +98,7 @@ class CTkEntry(CTkBaseClass):
         self._draw()
 
     def _create_bindings(self, sequence: Optional[str] = None):
-        """ set necessary bindings for functionality of widget, will overwrite other bindings """
+        """ settings necessary bindings for functionality of widget, will overwrite other bindings """
         if sequence is None or sequence == "<FocusIn>":
             self._entry.bind("<FocusIn>", self._entry_focus_in)
         if sequence is None or sequence == "<FocusOut>":

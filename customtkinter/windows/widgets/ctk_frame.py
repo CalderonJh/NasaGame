@@ -9,8 +9,8 @@ from .core_widget_classes import CTkBaseClass
 class CTkFrame(CTkBaseClass):
     """
     Frame with rounded corners and border.
-    Default foreground colors are set according to theme.
-    To make the frame transparent set fg_color=None.
+    Default foreground colors are settings according to theme.
+    To make the frame transparent settings fg_color=None.
     For detailed information check out the documentation.
     """
 
