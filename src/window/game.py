@@ -1,9 +1,10 @@
-import customtkinter as ctk
-from tkinter import *
-from PIL import Image
-import pygame
 import random
+from tkinter import *
 
+import pygame
+from PIL import Image
+
+import customtkinter as ctk
 # contiene la funcion get_info usada para obtener el tamaño de pantalla actual.
 from src.tools import modify, screen_info, path
 
